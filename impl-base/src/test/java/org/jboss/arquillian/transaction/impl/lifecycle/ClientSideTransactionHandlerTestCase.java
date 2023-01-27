@@ -43,14 +43,16 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.lang.reflect.Method;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ClientSideTransactionHandlerTestCase extends AbstractTestTestBase {
@@ -197,10 +199,10 @@ public class ClientSideTransactionHandlerTestCase extends AbstractTestTestBase {
         getManager().fire(new org.jboss.arquillian.test.spi.event.suite.Before(instance, testMethod));
 
         // checks if the transaction context hasn't been created
-        verifyZeroInteractions(mockTransactionContext);
+        verifyNoInteractions(mockTransactionContext);
 
         // verifies that the transaction hasn't been started
-        verifyZeroInteractions(mockTransactionProvider);
+        verifyNoInteractions(mockTransactionProvider);
 
         getManager().getContext(ClassContext.class).deactivate();
     }
@@ -218,10 +220,10 @@ public class ClientSideTransactionHandlerTestCase extends AbstractTestTestBase {
         getManager().fire(new org.jboss.arquillian.test.spi.event.suite.Before(instance, testMethod));
 
         // checks if the transaction context hasn't been created
-        verifyZeroInteractions(mockTransactionContext);
+        verifyNoInteractions(mockTransactionContext);
 
         // verifies that the transaction hasn't been started
-        verifyZeroInteractions(mockTransactionProvider);
+        verifyNoInteractions(mockTransactionProvider);
 
         getManager().getContext(ClassContext.class).deactivate();
     }

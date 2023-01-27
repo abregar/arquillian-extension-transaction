@@ -40,7 +40,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
 import java.lang.reflect.Method;
@@ -48,8 +48,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class InContainerTransactionHandlerWithCustomEnablerTestCase extends AbstractTestTestBase {
@@ -97,10 +101,10 @@ public class InContainerTransactionHandlerWithCustomEnablerTestCase extends Abst
         bind(TestScoped.class, TransactionProvider.class, mockTransactionProvider);
         bind(ApplicationScoped.class, Deployment.class, mockDeployment);
 
-        when(mockServiceLoader.onlyOne(TransactionProvider.class)).thenReturn(mockTransactionProvider);
-        when(mockDeployment.getDescription()).thenReturn(mockDeploymentDescriptor);
-        when(mockDeployment.isDeployed()).thenReturn(true);
-        when(mockDeploymentDescriptor.testable()).thenReturn(false);
+        lenient().when(mockServiceLoader.onlyOne(TransactionProvider.class)).thenReturn(mockTransactionProvider);
+        lenient().when(mockDeployment.getDescription()).thenReturn(mockDeploymentDescriptor);
+        lenient().when(mockDeployment.isDeployed()).thenReturn(true);
+        lenient().when(mockDeploymentDescriptor.testable()).thenReturn(false);
     }
 
     @After
@@ -118,7 +122,7 @@ public class InContainerTransactionHandlerWithCustomEnablerTestCase extends Abst
         getManager().fire(new org.jboss.arquillian.test.spi.event.suite.Before(instance, testMethod));
 
         // then
-        verifyZeroInteractions(mockTransactionContext);
+        verifyNoInteractions(mockTransactionContext);
     }
 
     @Test

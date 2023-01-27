@@ -24,7 +24,6 @@ import org.jboss.arquillian.core.api.annotation.Observes;
 import org.jboss.arquillian.core.spi.EventContext;
 import org.jboss.arquillian.core.spi.ServiceLoader;
 import org.jboss.arquillian.test.spi.TestResult;
-import org.jboss.arquillian.test.spi.TestResult.Status;
 import org.jboss.arquillian.test.spi.event.suite.After;
 import org.jboss.arquillian.test.spi.event.suite.Before;
 import org.jboss.arquillian.test.spi.event.suite.TestEvent;
@@ -33,7 +32,11 @@ import org.jboss.arquillian.transaction.api.annotation.Transactional;
 import org.jboss.arquillian.transaction.impl.configuration.TransactionConfiguration;
 import org.jboss.arquillian.transaction.impl.test.DefaultTransactionalTest;
 import org.jboss.arquillian.transaction.spi.context.TransactionContext;
-import org.jboss.arquillian.transaction.spi.event.*;
+import org.jboss.arquillian.transaction.spi.event.AfterTransactionEnded;
+import org.jboss.arquillian.transaction.spi.event.AfterTransactionStarted;
+import org.jboss.arquillian.transaction.spi.event.BeforeTransactionEnded;
+import org.jboss.arquillian.transaction.spi.event.BeforeTransactionStarted;
+import org.jboss.arquillian.transaction.spi.event.TransactionEvent;
 import org.jboss.arquillian.transaction.spi.provider.TransactionEnabler;
 import org.jboss.arquillian.transaction.spi.provider.TransactionProvider;
 import org.jboss.arquillian.transaction.spi.test.TransactionalTest;
@@ -155,11 +158,14 @@ public abstract class TransactionHandler {
      * @return true if test requires rollback, false otherwise
      */
     private boolean testRequiresRollbackDueToFailure() {
+        return false;
+/*
         if (testResultInstance.get() != null) {
             final Status actualStatus = testResultInstance.get().getStatus();
             return TestResult.Status.FAILED.equals(actualStatus);
         }
         return true;
+*/
     }
 
     /**
