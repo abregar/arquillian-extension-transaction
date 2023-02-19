@@ -102,9 +102,9 @@ public abstract class TransactionHandler {
 
     public void endTransactionAfterTest(@Observes(precedence = -1) EventContext<After> afterTestContext) {
         try {
-            afterTestContext.proceed();
-        } finally {
             endTransaction(afterTestContext.getEvent());
+        } finally {
+            afterTestContext.proceed();
         }
     }
 

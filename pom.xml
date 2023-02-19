@@ -12,7 +12,7 @@
 
   <groupId>org.jboss.arquillian.extension</groupId>
   <artifactId>arquillian-transaction-parent</artifactId>
-  <version>1.0.6.a1</version>
+  <version>1.0.6.a2</version>
   <packaging>pom</packaging>
 
   <name>Arquillian Transaction Extension: Parent</name>
@@ -26,9 +26,9 @@
   </licenses>
 
   <properties>
-    <version.arquillian_core>1.7.0.Alpha13</version.arquillian_core>
+    <version.arquillian_core>1.7.0.Alpha14</version.arquillian_core>
 
-    <version.junit>4.12</version.junit>
+    <version.junit>4.13.2</version.junit>
     <version.fest.assert>1.4</version.fest.assert>
     <version.mockito>4.11.0</version.mockito>
     <version.jboss_spec>3.0.2.Final</version.jboss_spec>
